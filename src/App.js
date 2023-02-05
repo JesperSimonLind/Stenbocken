@@ -1,24 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Route, Router, Routes } from "react-router-dom";
+import { Home } from "./components/Home";
+import { Layout } from "./components/Layout";
+import { Nyinflyttad } from "./components/Nyinflyttad";
+import { Dokument } from "./components/Dokument";
+import { RundanBladet } from "./components/RundanBladet";
+import { NotFound } from "./components/Notfound";
+import { Kontakt } from "./components/Kontakt";
+import { SinglePost } from "./components/SinglePost";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Home />}></Route>
+            <Route path="/nyinflyttad" element={<Nyinflyttad />}></Route>
+            <Route path="/kontakt" element={<Kontakt />}></Route>
+            <Route path="/dokument" element={<Dokument />}></Route>
+            <Route path="/rundanbladet" element={<RundanBladet />}></Route>
+            <Route path="*" element={<NotFound />}></Route>
+            <Route path="/post/:slug" element={<SinglePost />}></Route>
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 }
 
